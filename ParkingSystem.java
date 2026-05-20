@@ -13,28 +13,22 @@ public class ParkingSystem {
         }
     }
 
-    /** Parks a car in the first available spot. Returns the ticket, or null if full. */
     public static Ticket parkCar(String carNumber) {
         for (Spot s : spots) {
             if (!s.isOccupied()) {
                 Ticket t = new Ticket(tickets.size() + 1, carNumber);
                 tickets.add(t);
-                s.occupy(t);   // FIX: link ticket to spot
+                s.occupy(t); 
                 return t;
             }
         }
-        return null; // parking full
+        return null; 
     }
 
-    /**
-     * Processes exit for a given ticket ID.
-     * FIX: finds the exact spot that holds this ticket, not just "any occupied spot".
-     * Returns the ticket if found, null otherwise.
-     */
+
     public static Ticket exitCar(int ticketId) {
         for (Ticket t : tickets) {
             if (t.getTicketId() == ticketId) {
-                // Find the specific spot holding this ticket
                 for (Spot s : spots) {
                     if (s.isOccupied() && s.getCurrentTicket() == t) {
                         s.free();
