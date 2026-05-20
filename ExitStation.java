@@ -5,10 +5,6 @@ import java.awt.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-/**
- * ExitStation — Customer enters Ticket ID to pay and release their spot.
- * Records the payment so the Admin shift report is populated.
- */
 public class ExitStation extends JFrame {
 
     private JTextField ticketField;
@@ -25,7 +21,6 @@ public class ExitStation extends JFrame {
         add(Theme.header("Exit Station", "Enter your Ticket ID to pay and release your spot"),
                 BorderLayout.NORTH);
 
-        // Form
         JPanel form = new JPanel();
         form.setBackground(Theme.BG_DARK);
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
