@@ -5,14 +5,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
-/**
- * AdminMenu — full admin dashboard with:
- *   1. Add Spot
- *   2. View Total Spots
- *   3. Manage Users (Add / Update / Delete)
- *   4. Shifts & Payment Report
- *   5. Parked Cars Report
- */
 public class AdminMenu extends JFrame {
 
     private final AdminAction admin = new AdminAction();
@@ -28,7 +20,6 @@ public class AdminMenu extends JFrame {
 
         add(Theme.header("Admin Dashboard", "Manage the parking system"), BorderLayout.NORTH);
 
-        // ── 3×2 menu grid ────────────────────────────────────────
         JPanel grid = new JPanel(new GridLayout(3, 2, 14, 14));
         grid.setBackground(Theme.BG_DARK);
         grid.setBorder(BorderFactory.createEmptyBorder(16, 28, 10, 28));
@@ -44,7 +35,6 @@ public class AdminMenu extends JFrame {
 
         add(grid, BorderLayout.CENTER);
 
-        // Stats footer bar
         JPanel stats = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 8));
         stats.setBackground(Theme.BG_SURFACE);
         stats.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Theme.BORDER));
@@ -66,7 +56,6 @@ public class AdminMenu extends JFrame {
         add(stats, BorderLayout.SOUTH);
     }
 
-    // ── Menu card builder ────────────────────────────────────────
     private JPanel menuCard(String emoji, String title, String sub,
                             Color[] ramp, Runnable action) {
         JPanel card = new JPanel(new BorderLayout(10, 0)) {
@@ -107,7 +96,6 @@ public class AdminMenu extends JFrame {
         return card;
     }
 
-    // ── 1. Add Spot ──────────────────────────────────────────────
     private void doAddSpot() {
         String input = JOptionPane.showInputDialog(this,
                 "Enter new Spot Number (numeric):", "Add Parking Spot", JOptionPane.PLAIN_MESSAGE);
@@ -128,7 +116,6 @@ public class AdminMenu extends JFrame {
         }
     }
 
-    // ── 2. View Spots ────────────────────────────────────────────
     private void doViewSpots() {
         String[] cols = {"Spot #", "Status", "Plate (if occupied)", "Ticket ID"};
         DefaultTableModel model = new DefaultTableModel(cols, 0) {
@@ -165,7 +152,6 @@ public class AdminMenu extends JFrame {
         JOptionPane.showMessageDialog(this, panel, "Parking Spots", JOptionPane.PLAIN_MESSAGE);
     }
 
-    // ── 3. Manage Users ──────────────────────────────────────────
     private void doManageUsers() {
         JDialog dialog = new JDialog(this, "Manage Users", true);
         dialog.setSize(540, 400);
@@ -173,7 +159,6 @@ public class AdminMenu extends JFrame {
         dialog.getContentPane().setBackground(Theme.BG_DARK);
         dialog.setLayout(new BorderLayout());
 
-        // Table
         String[] cols = {"Username", "Password", "Role"};
         DefaultTableModel model = new DefaultTableModel(cols, 0) {
             public boolean isCellEditable(int r, int c) { return false; }
@@ -187,7 +172,6 @@ public class AdminMenu extends JFrame {
 
         dialog.add(sp, BorderLayout.CENTER);
 
-        // Button row
         JPanel btnRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         btnRow.setBackground(Theme.BG_DARK);
         btnRow.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Theme.BORDER));
@@ -203,7 +187,6 @@ public class AdminMenu extends JFrame {
         btnRow.add(closeBtn);
         dialog.add(btnRow, BorderLayout.SOUTH);
 
-        // ── Add ──
         addBtn.addActionListener(e -> {
             JTextField uField = Theme.textField("");
             JTextField pField = Theme.textField("");
@@ -229,7 +212,6 @@ public class AdminMenu extends JFrame {
             }
         });
 
-        // ── Update ──
         editBtn.addActionListener(e -> {
             int row = table.getSelectedRow();
             if (row < 0) { JOptionPane.showMessageDialog(dialog, "Select a user first."); return; }
@@ -249,7 +231,6 @@ public class AdminMenu extends JFrame {
             }
         });
 
-        // ── Delete ──
         delBtn.addActionListener(e -> {
             int row = table.getSelectedRow();
             if (row < 0) { JOptionPane.showMessageDialog(dialog, "Select a user first."); return; }
@@ -274,7 +255,6 @@ public class AdminMenu extends JFrame {
         }
     }
 
-    // ── 4. Shifts & Payments ─────────────────────────────────────
     private void doPayments() {
         String[] cols = {"Ticket ID", "Plate", "Hours", "Amount (EGP)", "Timestamp"};
         DefaultTableModel model = new DefaultTableModel(cols, 0) {
@@ -306,7 +286,6 @@ public class AdminMenu extends JFrame {
         JOptionPane.showMessageDialog(this, panel, "Shifts & Payment Report", JOptionPane.PLAIN_MESSAGE);
     }
 
-    // ── 5. Parked Cars Report ─────────────────────────────────────
     private void doParkedCars() {
         String[] cols = {"Spot #", "Ticket ID", "Plate Number", "Entry Time"};
         DefaultTableModel model = new DefaultTableModel(cols, 0) {
@@ -350,7 +329,6 @@ public class AdminMenu extends JFrame {
         JOptionPane.showMessageDialog(this, panel, "Parked Cars Report", JOptionPane.PLAIN_MESSAGE);
     }
 
-    // ── Back ──────────────────────────────────────────────────────
     private void doBack() {
         dispose();
         new RoleSelector().setVisible(true);
