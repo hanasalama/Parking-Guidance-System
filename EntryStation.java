@@ -3,9 +3,6 @@ package com.mycompany.finalinshallah;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * EntryStation — Customer enters plate number and receives a parking ticket.
- */
 public class EntryStation extends JFrame {
 
     private JTextField plateField;
@@ -22,7 +19,6 @@ public class EntryStation extends JFrame {
         add(Theme.header("Entry Station", "Enter your plate number to get a parking ticket"),
                 BorderLayout.NORTH);
 
-        // Form
         JPanel form = new JPanel();
         form.setBackground(Theme.BG_DARK);
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
@@ -46,7 +42,6 @@ public class EntryStation extends JFrame {
         printBtn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         printBtn.addActionListener(e -> printTicket());
 
-        // Allow Enter key
         plateField.addActionListener(e -> printTicket());
 
         form.add(plateLbl);
