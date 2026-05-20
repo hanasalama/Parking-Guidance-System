@@ -4,12 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 
-/**
- * CustomerPanel — lets a customer:
- *   1. Print a ticket (go to EntryStation)
- *   2. Pay and exit (go to ExitStation)
- *   3. View a receipt by ticket ID (inline)
- */
+
 public class CustomerPanel extends JFrame {
 
     public CustomerPanel() {
@@ -23,7 +18,6 @@ public class CustomerPanel extends JFrame {
 
         add(Theme.header("Customer", "What would you like to do?"), BorderLayout.NORTH);
 
-        // Cards
         JPanel cards = new JPanel();
         cards.setLayout(new BoxLayout(cards, BoxLayout.Y_AXIS));
         cards.setBackground(Theme.BG_DARK);
@@ -43,7 +37,6 @@ public class CustomerPanel extends JFrame {
 
         add(cards, BorderLayout.CENTER);
 
-        // Back button
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
         footer.setBackground(Theme.BG_DARK);
         JButton back = Theme.ghostButton("← Back to role selection");
@@ -74,7 +67,6 @@ public class CustomerPanel extends JFrame {
         card.setBorder(BorderFactory.createEmptyBorder(14, 16, 14, 16));
         card.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Icon circle
         JPanel circle = new JPanel(new GridBagLayout());
         circle.setOpaque(false);
         circle.setPreferredSize(new Dimension(46, 46));
