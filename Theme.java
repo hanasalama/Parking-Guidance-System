@@ -5,48 +5,40 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
-/**
- * Theme — central palette and reusable UI factory methods.
- * Every screen uses these constants so the whole app looks cohesive.
- */
 public class Theme {
 
-    // ── Palette ──────────────────────────────────────────────────
-    public static final Color BG_DARK      = new Color(13,  17,  23);   // main page bg
-    public static final Color BG_SURFACE   = new Color(22,  30,  44);   // card surface
-    public static final Color BG_ELEVATED  = new Color(30,  41,  59);   // elevated card
-    public static final Color ACCENT_BLUE  = new Color(56, 139, 253);   // primary accent
-    public static final Color ACCENT_GREEN = new Color(63, 185, 119);   // success / available
-    public static final Color ACCENT_RED   = new Color(248, 81,  73);   // danger / occupied
-    public static final Color ACCENT_AMBER = new Color(210,153,  34);   // warning
-    public static final Color BORDER       = new Color(48,  54,  61);   // subtle border
-    public static final Color TEXT_PRI     = new Color(230, 237, 243);  // primary text
-    public static final Color TEXT_SEC     = new Color(125, 140, 160);  // secondary text
-    public static final Color TEXT_MUT     = new Color(72,  84,  96);   // muted text
+    public static final Color BG_DARK      = new Color(13,  17,  23);   
+    public static final Color BG_SURFACE   = new Color(22,  30,  44);   
+    public static final Color BG_ELEVATED  = new Color(30,  41,  59);   
+    public static final Color ACCENT_BLUE  = new Color(56, 139, 253);   
+    public static final Color ACCENT_GREEN = new Color(63, 185, 119);   
+    public static final Color ACCENT_RED   = new Color(248, 81,  73);  
+    public static final Color ACCENT_AMBER = new Color(210,153,  34);   
+    public static final Color BORDER       = new Color(48,  54,  61);   
+    public static final Color TEXT_PRI     = new Color(230, 237, 243);  
+    public static final Color TEXT_SEC     = new Color(125, 140, 160);  
+    public static final Color TEXT_MUT     = new Color(72,  84,  96);   
 
-    // Card accent ramps  [light fill, strong accent, title, subtitle]
+
     public static final Color[] RAMP_BLUE   = {new Color(12,28,55),  ACCENT_BLUE,  new Color(147,197,253), new Color(96,160,250)};
     public static final Color[] RAMP_GREEN  = {new Color(10,30,22),  ACCENT_GREEN, new Color(134,239,172), new Color(74,200,120)};
     public static final Color[] RAMP_AMBER  = {new Color(35,25,5),   ACCENT_AMBER, new Color(253,224,71),  new Color(210,153,34)};
     public static final Color[] RAMP_PURPLE = {new Color(25,15,55),  new Color(139,92,246), new Color(196,181,253), new Color(139,92,246)};
 
-    // ── Typography ───────────────────────────────────────────────
+
     public static final Font FONT_TITLE  = new Font("Segoe UI", Font.BOLD,  20);
     public static final Font FONT_HEAD   = new Font("Segoe UI", Font.BOLD,  15);
     public static final Font FONT_BODY   = new Font("Segoe UI", Font.PLAIN, 13);
     public static final Font FONT_SMALL  = new Font("Segoe UI", Font.PLAIN, 11);
     public static final Font FONT_MONO   = new Font("Consolas",  Font.PLAIN, 13);
 
-    // ── Factory helpers ──────────────────────────────────────────
 
-    /** Dark JPanel with no layout set (caller sets layout). */
     public static JPanel panel(Color bg) {
         JPanel p = new JPanel();
         p.setBackground(bg);
         return p;
     }
 
-    /** Label with given text, font, foreground. */
     public static JLabel label(String text, Font font, Color fg) {
         JLabel l = new JLabel(text);
         l.setFont(font);
@@ -54,12 +46,6 @@ public class Theme {
         return l;
     }
 
-    /**
-     * Rounded pill button with hover effect.
-     * @param text   button label
-     * @param bg     normal background
-     * @param fg     text color
-     */
     public static JButton pillButton(String text, Color bg, Color fg) {
         JButton btn = new JButton(text) {
             @Override protected void paintComponent(Graphics g) {
@@ -87,7 +73,6 @@ public class Theme {
         return btn;
     }
 
-    /** Ghost (outline) button on dark background. */
     public static JButton ghostButton(String text) {
         JButton btn = new JButton(text) {
             @Override protected void paintComponent(Graphics g) {
@@ -117,7 +102,7 @@ public class Theme {
         return btn;
     }
 
-    /** Styled dark text field. */
+
     public static JTextField textField(String placeholder) {
         JTextField tf = new JTextField(14);
         tf.setBackground(BG_ELEVATED);
@@ -131,7 +116,6 @@ public class Theme {
         return tf;
     }
 
-    /** Styled dark password field. */
     public static JPasswordField passwordField() {
         JPasswordField pf = new JPasswordField(14);
         pf.setBackground(BG_ELEVATED);
@@ -145,7 +129,6 @@ public class Theme {
         return pf;
     }
 
-    /** JTable styled for dark theme. */
     public static void styleTable(JTable table) {
         table.setBackground(BG_SURFACE);
         table.setForeground(TEXT_PRI);
@@ -162,7 +145,6 @@ public class Theme {
         table.getTableHeader().setBorder(BorderFactory.createMatteBorder(0,0,1,0,BORDER));
     }
 
-    /** Styled JScrollPane for dark theme. */
     public static JScrollPane scrollPane(JTable table) {
         JScrollPane sp = new JScrollPane(table);
         sp.setBackground(BG_SURFACE);
@@ -171,7 +153,6 @@ public class Theme {
         return sp;
     }
 
-    /** Dark combo box. */
     public static JComboBox<String> comboBox(String[] items) {
         JComboBox<String> cb = new JComboBox<>(items);
         cb.setBackground(BG_ELEVATED);
@@ -180,7 +161,6 @@ public class Theme {
         return cb;
     }
 
-    /** Rounded surface card panel. */
     public static JPanel card(Color bg) {
         JPanel p = new JPanel() {
             @Override protected void paintComponent(Graphics g) {
@@ -199,7 +179,7 @@ public class Theme {
         return p;
     }
 
-    /** Header panel: dark bg, title + subtitle stacked. */
+
     public static JPanel header(String title, String subtitle) {
         JPanel h = new JPanel();
         h.setBackground(BG_DARK);
@@ -214,7 +194,7 @@ public class Theme {
         h.add(Box.createRigidArea(new Dimension(0, 4)));
         h.add(s);
 
-        // Bottom separator
+
         JPanel sep = new JPanel();
         sep.setBackground(BORDER);
         sep.setPreferredSize(new Dimension(0, 1));
@@ -225,7 +205,7 @@ public class Theme {
         return h;
     }
 
-    /** Apply dark look-and-feel to the whole app. Call once at startup. */
+
     public static void applyLAF() {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
