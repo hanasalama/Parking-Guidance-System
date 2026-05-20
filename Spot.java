@@ -3,7 +3,7 @@ package com.mycompany.finalinshallah;
 public class Spot {
     private final int spotNumber;
     private boolean occupied;
-    private Ticket currentTicket; // FIX: store the ticket that occupies this spot
+    private Ticket currentTicket; 
 
     public Spot(int spotNumber) {
         this.spotNumber = spotNumber;
