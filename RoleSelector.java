@@ -5,10 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 
-/**
- * RoleSelector — the app's main entry screen.
- * Presents four role cards: Customer, Entry Operator, Exit Operator, Admin.
- */
+
 public class RoleSelector extends JFrame {
 
     public RoleSelector() {
@@ -20,10 +17,10 @@ public class RoleSelector extends JFrame {
         getContentPane().setBackground(Theme.BG_DARK);
         setLayout(new BorderLayout());
 
-        // ── Header ───────────────────────────────────────────────
+
         add(Theme.header("Parking Guidance System", "Select your role to continue"), BorderLayout.NORTH);
 
-        // ── 2×2 card grid ────────────────────────────────────────
+
         JPanel grid = new JPanel(new GridLayout(2, 2, 14, 14));
         grid.setBackground(Theme.BG_DARK);
         grid.setBorder(BorderFactory.createEmptyBorder(16, 28, 28, 28));
@@ -50,7 +47,6 @@ public class RoleSelector extends JFrame {
 
         add(grid, BorderLayout.CENTER);
 
-        // ── Footer ────────────────────────────────────────────────
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
         footer.setBackground(Theme.BG_DARK);
         JLabel ver = Theme.label("Parking System v1.0  •  20 EGP / hour",
@@ -58,8 +54,7 @@ public class RoleSelector extends JFrame {
         footer.add(ver);
         add(footer, BorderLayout.SOUTH);
     }
-
-    // ── Role card builder ────────────────────────────────────────
+    
     private JPanel makeRoleCard(String role, String desc, String emoji,
                                 Color[] ramp, ActionListener action) {
         JPanel card = new JPanel(new BorderLayout(0, 10)) {
@@ -67,13 +62,10 @@ public class RoleSelector extends JFrame {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 boolean hov = Boolean.TRUE.equals(getClientProperty("hov"));
-                // Card background
                 g2.setColor(hov ? ramp[0].brighter() : ramp[0]);
                 g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 14, 14));
-                // Top accent bar
                 g2.setColor(ramp[1]);
                 g2.fillRoundRect(0, 0, getWidth(), 4, 4, 4);
-                // Border
                 g2.setColor(new Color(ramp[1].getRed(), ramp[1].getGreen(), ramp[1].getBlue(), 60));
                 g2.setStroke(new BasicStroke(1f));
                 g2.draw(new RoundRectangle2D.Float(0.5f, 0.5f, getWidth()-1, getHeight()-1, 14, 14));
@@ -85,14 +77,14 @@ public class RoleSelector extends JFrame {
         card.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         card.setBorder(BorderFactory.createEmptyBorder(18, 18, 18, 18));
 
-        // Emoji icon
+
         JLabel icon = new JLabel(emoji);
         icon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 28));
 
-        // Role name
+
         JLabel roleLbl = Theme.label(role, Theme.FONT_HEAD, ramp[2]);
 
-        // Description
+
         JLabel descLbl = new JLabel("<html><div style='width:120px'>" + desc + "</div></html>");
         descLbl.setForeground(ramp[3]);
         descLbl.setFont(Theme.FONT_SMALL);
@@ -102,7 +94,6 @@ public class RoleSelector extends JFrame {
         text.add(roleLbl);
         text.add(descLbl);
 
-        // Arrow
         JLabel arrow = Theme.label("›", new Font("Segoe UI", Font.PLAIN, 24), ramp[3]);
 
         card.add(icon,  BorderLayout.NORTH);
