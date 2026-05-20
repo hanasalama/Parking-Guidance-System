@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class AdminAction {
 
-    // Payment records: {ticketId, plate, hours, amount, timestamp}
     public static final ArrayList<String[]> paymentRecords = new ArrayList<>();
     public static final ArrayList<User>     users          = new ArrayList<>();
 
@@ -13,15 +12,9 @@ public class AdminAction {
         users.add(new User("operator", "pass", "Operator"));
     }
 
-    // ── Spots ────────────────────────────────────────────────────
-
-    /**
-     * Adds a spot only if the ID doesn't already exist.
-     * FIX: uses ParkingSystem.spots as the single source of truth.
-     */
     public boolean addSpot(int id) {
         for (Spot s : ParkingSystem.spots) {
-            if (s.getSpotNumber() == id) return false; // already exists
+            if (s.getSpotNumber() == id) return false; 
         }
         ParkingSystem.spots.add(new Spot(id));
         return true;
@@ -30,11 +23,10 @@ public class AdminAction {
     public int totalSpots()    { return ParkingSystem.spots.size(); }
     public int occupiedSpots() { return ParkingSystem.occupiedCount(); }
 
-    // ── Users ─────────────────────────────────────────────────────
 
     public boolean addUser(String username, String password, String role) {
         for (User u : users) {
-            if (u.getUsername().equalsIgnoreCase(username)) return false; // duplicate
+            if (u.getUsername().equalsIgnoreCase(username)) return false; 
         }
         users.add(new User(username, password, role));
         return true;
@@ -55,7 +47,7 @@ public class AdminAction {
         return false;
     }
 
-    // ── Revenue ───────────────────────────────────────────────────
+
 
     public double getTotalRevenue() {
         double total = 0;
