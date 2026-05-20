@@ -6,12 +6,6 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * OperatorEntryPanel — Entry Operator screen.
- * Shows a live map of all parking spots.
- * FIX: spot buttons now call ParkingSystem.parkCar() / exitCar() so the
- * backend state is always in sync with what the operator sees.
- */
 public class OperatorEntryPanel extends JFrame {
 
     private JPanel spotGrid;
@@ -29,7 +23,6 @@ public class OperatorEntryPanel extends JFrame {
 
         add(Theme.header("Spot Monitor", "Live view of parking availability"), BorderLayout.NORTH);
 
-        // Status bar
         JPanel statusBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 16, 8));
         statusBar.setBackground(Theme.BG_SURFACE);
         statusBar.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Theme.BORDER));
@@ -41,7 +34,6 @@ public class OperatorEntryPanel extends JFrame {
         statusBar.add(legendFree);
         statusBar.add(legendOcc);
 
-        // Spot grid
         spotGrid = new JPanel();
         spotGrid.setBackground(Theme.BG_DARK);
         spotGrid.setBorder(BorderFactory.createEmptyBorder(20, 30, 10, 30));
@@ -52,7 +44,6 @@ public class OperatorEntryPanel extends JFrame {
         center.add(spotGrid, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
 
-        // Footer
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER, 12, 8));
         footer.setBackground(Theme.BG_DARK);
 
@@ -130,7 +121,6 @@ public class OperatorEntryPanel extends JFrame {
 
     private void handleSpotClick(Spot s) {
         if (!s.isOccupied()) {
-            // Advise customer of available spot
             int choice = JOptionPane.showConfirmDialog(this,
                     "Spot " + s.getSpotNumber() + " is FREE.\n" +
                     "Direct a customer here?\n\n" +
